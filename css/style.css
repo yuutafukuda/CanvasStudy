@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+}
+
+.heading {
+  text-align: center;
+}
+
+.heading h1 span {
+  text-transform: uppercase;
+  color: #e34c26;
+}
+
+.topics {
+  margin: 30px auto;
+  text-align: center;
+  font-size: 15px;
+}
+
+canvas {
+  border: 1px solid black;
+}
+/*# sourceMappingURL=style.css.map */
