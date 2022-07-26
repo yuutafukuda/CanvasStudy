@@ -33,39 +33,67 @@ for (var i = 0; i < 3; i++) {
     c.stroke(); 
 }
 
+// Circle Class
+function Circle(x, y, dx, dy, radius, color) {
+    this.x = x;
+    this.y = y;
+    this.dx = dx;
+    this.dy = dy;
+    this.radius = radius;
+    this.color = color;
+    
+    this.draw = function() {
+        c.beginPath();
+        c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+        c.strokeStyle = this.color;
+        c.stroke();       
+
+        c.fillStyle = this.color;
+        c.fill();
+    }
+    
+    this.update = function() {
+        if (this.x + this.radius > innerWidth || this.x - this.radius < 0) {
+            this.dx = -this.dx;
+        }
+        
+        if (this.y + this.radius > innerHeight || this.y - this.radius < 0){
+            this.dy = -this.dy;
+        }
+        this.x += this.dx;
+        this.y += this.dy;
+        
+        this.draw();
+    }
+}
+
 //Animation
-var x = Math.random() * innerWidth;
-var y = Math.random() * innerHeight;
-var dx = 5;
-var dy = 5;
-let radius = 30;
+
+let circleArray = [];
+
+let ncircles = 15;
+for (var i = 0; i < ncircles; i++) {
+    let radius = 40;
+    var x = Math.random() * (innerWidth - (radius * 2)) + radius;
+    var y = Math.random() * (innerHeight - (radius * 2)) + radius;
+    var dx = (Math.random() - 0.5) * 10;
+    var dy = (Math.random() - 0.5) * 10;
+    var r = Math.random() * 255;
+    var g = Math.random() * 255;
+    var b = Math.random() * 255;
+    var a = Math.random();
+    let color = 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
+
+    circleArray.push(new Circle(x, y, dx, dy, radius, color));
+}
 
 function animate() {
     requestAnimationFrame(animate);
     c.clearRect(0, 0, innerWidth, innerHeight);
 
-    c.beginPath();
-    c.arc(x, y, radius, 0, Math.PI * 2, true);
-    c.strokeStyle = 'red';
-    c.stroke();
-    
-    if (x + radius > innerWidth || x - radius < 0) {
-        dx = -dx;
+    for (var i = 0; i < circleArray.length; i++){
+        circleArray[i].update();
     }
-    
-    if ( y + radius > innerHeight || y - radius < 0){
-        dy = -dy;
-    }
-    x += dx;
-    y += dy;
 }
 
 animate();
-
-function Circle(x, y, dx, dy, color) {
-    this.x = x;
-    this.y = y;
-    this.dx = dx;
-    this.dy = dy;
-    this.color = color;
-}
