@@ -31,5 +31,4 @@ for (var i = 0; i < 3; i++) {
     c.arc(x * window.innerWidth/2, y * window.innerHeight/2, 30, 0, Math.PI * 2, true);
     c.strokeStyle = 'rgba(' + (x * 255) + ',' + (y * 255) + ',' + ((x + y) * 255/2) + ', .5)';
     c.stroke(); 
-    
 }
